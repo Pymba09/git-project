@@ -15,4 +15,8 @@ return $a;
 $c = &foo();
 $c = bar();
 echo $a+$b;
+
+
+$newsdfdsf
 ?>
+test

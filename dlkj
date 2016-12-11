@@ -1,0 +1,27 @@
+[33mcommit 923095ddc8adf82ad7e10477b88449a9707077ef[m
+Author: Victoria <pymba09@yandex.ru>
+Date:   Wed Nov 30 17:58:36 2016 +0300
+
+    comment
+
+[1mdiff --git a/test.txt b/test.txt[m
+[1mindex 5b9c169..3bfdc28 100644[m
+[1m--- a/test.txt[m
+[1m+++ b/test.txt[m
+[36m@@ -6,13 +6,7 @@[m [mglobal $a;[m
+ $a++;[m
+ return $a;[m
+ }[m
+[31m-function &foo(){[m
+[31m-global $a;[m
+[31m-$a++;[m
+[31m-return $a;[m
+[31m-}[m
+[32m+[m[32mlast[m
+[32m+[m
+ [m
+[31m-$c = &foo();[m
+[31m-$c = bar();[m
+[31m-echo $a+$b;[m
+ ?>[m
+\ No newline at end of file[m

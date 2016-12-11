@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 if (isset($_POST['nik'])) { $login = $_POST['nik']; if ($login == '') { unset($login);} } //заносим введенный пользователем логин в переменную $login, если он пустой, то уничтожаем переменную
 if (isset($_POST['password'])) { $password=$_POST['password']; if ($password =='') { unset($password);} }
@@ -223,4 +223,8 @@ else {
 exit ("Ошибка! Вы не зарегистрированы."); //останавливаем выполнение сценариев
 
      }
+	 $to='admin@mail.ru';
+  $subject = 'Вы успешно зарегистрированы';
+  $msg = "Поздравляем".$login."Вы успешно зарегистрированы на сайте phpform.ru!";
+  mail($email, $subject, $msg, 'From:' . $to);
 ?>

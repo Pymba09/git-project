@@ -1,4 +1,4 @@
-<div id="content_inner">
+﻿<div id="content_inner">
 	
 					<form    action="regform.php"   method="post" name="main" onsubmit="" enctype="multipart/form-data">
     <table bgcolor="#dddddd">

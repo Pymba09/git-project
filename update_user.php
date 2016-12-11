@@ -49,36 +49,6 @@ $result4 = mysql_query("UPDATE users SET    login='$login' WHERE login='$old_log
 	  
 	           ////////ИЗМЕНЕНИЕ    EMAIL
             ////////////////////////
-else if (isset($_POST['email']))//Если существует EMAIL
-                  {
-            $email = $_POST['email'];
-            if ($email == '') {    exit("Вы не ввели email");} //Если    логин пустой, то останавливаем 
-function checkEmail($email)
-{
-	// вернет true или false
-	
-	if(!filter_var($email,FILTER_VALIDATE_EMAIL))
-		return FALSE;
-	else	return TRUE;	
-}	
-if(!checkEmail($email))
-{
-exit ("Вы ввели некорректный email."); //останавливаем выполнение сценариев
-}
-            }
-//    проверка на существование пользователя с таким же логином
-            $result2 = mysql_query("SELECT id FROM    users WHERE email='$email'",$db);
-            $myr = mysql_fetch_array($result2);
-            if (!empty($myr['id'])) {
-            exit ("Извините,    введённый вами email уже зарегистрирован. Введите другой email."); //останавливаем выполнение сценариев
-
-            }
-$result4 = mysql_query("UPDATE users SET    email='$email' WHERE login='$old_login'",$db);//обновляем в базе логин пользователя 
-
-            if ($result4=='TRUE') {//если выполнено верно, то обновляем все сообщения,    которые отправлены ему
-                   $_SESSION['email'] = $email;//Обновляем логин в сессии 
-            echo "<html><head><meta    http-equiv='Refresh' content='5;    URL=page.php?id=".$_SESSION['id']."'></head><body>Ваш email изменен! Вы    будете перемещены через 5 сек. Если не хотите ждать, то <a    href='page.php?id=".$_SESSION['id']."'>нажмите    сюда.</a></body></html>";}//отправляем    пользователя назад
-      
 	  
 ////////////////////////
             ////////ИЗМЕНЕНИЕ    ПАРОЛЯ
@@ -107,6 +77,7 @@ $result4 = mysql_query("UPDATE users SET    password='$password' WHERE login='$o
             ////////////////////////
             ////////ИЗМЕНЕНИЕ    АВАТАРЫ
             ////////////////////////
+			
             else if    (isset($_FILES['fupload']['name'])) //отправлялась    ли переменная
                   {
 if (empty($_FILES['fupload']['name']))
@@ -200,4 +171,39 @@ $result4 = mysql_query("UPDATE users SET    avatar='$avatar' WHERE login='$old_l
             if ($result4=='TRUE') {//если верно, то отправляем на личную страничку
             echo "<html><head><meta    http-equiv='Refresh' content='5;    URL=page.php?id=".$_SESSION['id']."'></head><body>Ваша аватарка изменена! Вы    будете перемещены через 5 сек. Если не хотите ждать, то <a href='page.php?id=".$_SESSION['id']."'>нажмите    сюда.</a></body></html>";}
       } 
+	  else if (isset($_POST['email']))
+	  {                  
+            $email = $_POST['email'];
+			$email = stripslashes($email); $email = htmlspecialchars($email); $email = trim($email);
+            if ($email == '') {    exit("Вы не ввели email");} //Если    логин пустой, то останавливаем 
+			
+			
+			
+function checkEmail($email)
+{
+	// вернет true или false
+	
+	if(!filter_var($email,FILTER_VALIDATE_EMAIL))
+		return FALSE;
+	else	return TRUE;	
+}	
+if(!checkEmail($email))
+{
+exit ("Вы ввели некорректный email."); //останавливаем выполнение сценариев
+}
+			
+//    проверка на существование пользователя с таким же логином
+            $result2 = mysql_query("SELECT id FROM users WHERE email='$email'",$db);
+            $myr = mysql_fetch_array($result2);
+            if (!empty($myr['id'])) {
+            exit ("Извините,    введённый вами email уже зарегистрирован. Введите другой email."); //останавливаем выполнение сценариев
+
+            }
+$result4 = mysql_query("UPDATE users SET email='$email' WHERE email='$old_email'",$db);//обновляем в базе логин пользователя 
+
+            if ($result4=='TRUE') {//если выполнено верно, то обновляем все сообщения,    которые отправлены ему
+                   $_SESSION['email'] = $email;//Обновляем логин в сессии 
+            echo "<html><head><meta    http-equiv='Refresh' content='5;    URL=page.php?id=".$_SESSION['id']."'></head><body>Ваш email изменен! Вы    будете перемещены через 5 сек. Если не хотите ждать, то <a    href='page.php?id=".$_SESSION['id']."'>нажмите    сюда.</a></body></html>";}//отправляем    пользователя назад
+      }
+
             ?>
